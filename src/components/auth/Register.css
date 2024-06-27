@@ -1,8 +1,16 @@
-.register-container {
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  } */
+  
+  .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
+    padding: 20px;
   }
   
   .register-form {
@@ -11,8 +19,9 @@
     width: 300px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
+    text-align: center;
   }
   
   .register-form h2 {
@@ -21,15 +30,19 @@
   }
   
   .register-form label {
-    margin-bottom: 5px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
   }
   
   .register-form input[type="email"],
-  .register-form input[type="password"] {
-    margin-bottom: 15px;
+  .register-form input[type="password"]
+  .register-form input[type="text"] {
+    width: 100%;
+    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 4px;
   }
   
   .register-form input[type="submit"] {
@@ -37,32 +50,48 @@
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
   }
   
   .register-form input[type="submit"]:hover {
     background-color: #45a049;
   }
   
-  .register-links {
+.show-password-register {
+    display: flex;
+    align-items: self-start;
+    margin-bottom: 20px;
+}
+
+.show-password-register input[type="checkbox"] {
+    margin-right: 5px;
+    margin-top: 1.5px;
+}
+
+.show-password-register label {
+    text-align: center;
+    font-weight: lighter;
+    font-size: smaller;
+}
+
+.register-links {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 30px;
   }
   
-  .register-links .auth-button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 3px;
+  .register-links a {
+    color: #007bff;
     text-decoration: none;
-    cursor: pointer;
+    transition: color 0.3s;
+    font-size: smaller;
   }
   
-  .register-links .auth-button:hover {
-    background-color: #0056b3;
+  .register-links a:hover {
+    color: #0056b3;
   }
   
   .error-message {
@@ -71,3 +100,19 @@
     text-align: center;
   }
   
+  @media (max-width: 600px) {
+    .register-form {
+      width: 90%;
+      padding: 15px;
+      max-width: none;
+    }
+  
+    .register-links {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .register-links a {
+      margin-bottom: 10px;
+    }
+  }

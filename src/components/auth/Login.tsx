@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { Amplify } from "aws-amplify";
 import outputs from "../../amplify_outputs.json";
@@ -21,15 +21,17 @@ interface LoginProps {
 }
 
 export default function Login({ updateAuthStatus }: LoginProps) {
+  const [showPassword, setShowPassword] = useState(false);
+  
   async function handleSubmit(event: FormEvent<LoginForm>) {
     event.preventDefault();
     const form = event.currentTarget;
 
     try {
       await signIn({
-            username: form.elements.email.value,
-            password: form.elements.password.value,
-        });
+        username: form.elements.email.value,
+        password: form.elements.password.value,
+      });
       alert("Login successful!");
       updateAuthStatus(true);
     } catch (error) {
@@ -43,9 +45,18 @@ export default function Login({ updateAuthStatus }: LoginProps) {
       <form onSubmit={handleSubmit} className="login-form">
         <h2>Login</h2>
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="email" autoComplete="username" required />
         <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+        <input type={showPassword ? "text" : "password"} id="password" name="password" autoComplete="current-password" required />
+        <div className="show-password">
+          <input
+            type="checkbox"
+            id="showPassword"
+            checked={showPassword}
+            onChange={() => setShowPassword(!showPassword)}
+          />
+          <label htmlFor="showPassword">Show Password</label>
+        </div>
         <input type="submit" value="Login" />
         <div className="login-links">
           <Link to="/forgot-password">Forgot Password?</Link>

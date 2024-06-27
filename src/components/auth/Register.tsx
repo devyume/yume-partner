@@ -18,6 +18,8 @@ interface RegisterForm extends HTMLFormElement {
 }
 
 export default function Register() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [confirmShowPassword, setConfirmShowPassword] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
@@ -53,15 +55,31 @@ export default function Register() {
         <h2>Register</h2>
         {error && <p className="error-message">{error}</p>}
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="email" autoComplete="username" required />
         <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+        <input type={showPassword ? "text" : "password"} id="password" name="password" autoComplete="new-password"required />
         <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required />
+        <input type={confirmShowPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" autoComplete="new-password"required />
+        <div className="show-password-register">
+          <input
+            type="checkbox"
+            id="showPassword"
+            checked={showPassword}
+            onChange={() => setShowPassword(!showPassword)}
+          />
+          <label htmlFor="showPassword">Show Password</label>
+          <input
+            type="checkbox"
+            id="showPassword"
+            checked={confirmShowPassword}
+            onChange={() => setConfirmShowPassword(!confirmShowPassword)}
+          />
+          <label htmlFor="showPassword">Show Password</label>
+        </div>
         <input type="submit" value="Register" />
         <div className="register-links">
-          <Link to="/login" className="auth-button">Go back to Login</Link>
-          <button type="button" onClick={() => navigate('/')} className="auth-button">Cancel</button>
+          <Link to="/login">Login</Link>
+          <Link to="/">Cancel</Link>
         </div>
       </form>
     </div>

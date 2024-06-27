@@ -1,8 +1,16 @@
-.validate-container {
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .validate-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
+    padding: 20px;
   }
   
   .validate-form {
@@ -11,8 +19,9 @@
     width: 300px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
+    text-align: center;
   }
   
   .validate-form h2 {
@@ -20,15 +29,26 @@
     text-align: center;
   }
   
+.validate-form p {
+    font-size: small;
+    font-weight: 200;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #007bff;
+}
   .validate-form label {
-    margin-bottom: 5px;
+    margin-top: 30px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
   }
   
   .validate-form input[type="text"] {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 4px;
+    width: 100%;
   }
   
   .validate-form input[type="submit"] {
@@ -38,6 +58,8 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
   }
   
   .validate-form input[type="submit"]:hover {
@@ -47,13 +69,14 @@
   .validate-links {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 30px;
   }
   
   .validate-links a {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s;
+    font-size: smaller;
   }
   
   .validate-links a:hover {
@@ -66,3 +89,19 @@
     text-align: center;
   }
   
+  @media (max-width: 600px) {
+    .validate-form {
+      width: 90%;
+      padding: 15px;
+      max-width: none;
+    }
+  
+    .validate-links {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .validate-links a {
+      margin-bottom: 10px;
+    }
+  }

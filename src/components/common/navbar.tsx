@@ -11,7 +11,15 @@ interface NavBarProps {
 }
 
 function NavBar({ isAuthenticated, updateAuthStatus }: NavBarProps) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const handleRegister = () =>{
+    navigate('/register');
+  }
+
+  const handleSignIn = () =>{
+    navigate('/login');
+  }
 
   const handleSignout = async () => {
     try {
@@ -32,8 +40,8 @@ function NavBar({ isAuthenticated, updateAuthStatus }: NavBarProps) {
         {
           isAuthenticated === false && (
             <div className='navbar-auth'>
-              <button className='auth-button'>Register</button>
-              <button className='auth-button'>SignIn</button>
+              <button className='auth-button' onClick={handleRegister}>Register</button>
+              <button className='auth-button' onClick={handleSignIn}>SignIn</button>
             </div>
           )
         }
