@@ -1,14 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import NavBar from "./components/common/navbar";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
+  let items = ["Home","Product", "Service"];
   return (
-    <div className="App">
-      <header className="App-header">
-        
-      </header>
-    </div>
+    <>
+     <NavBar />
+     <Routes>
+      
+     </Routes>
+    </>
   );
 }
 
