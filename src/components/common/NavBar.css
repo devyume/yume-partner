@@ -11,12 +11,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000; 
     font-size: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .navbar-contents {
@@ -50,7 +47,7 @@
   .auth-button {
     background: none;
     border: none;
-    color: #000;
+    color: #8c7a7a;
     cursor: pointer;
     font-size: 1rem;
     margin: 0 5px;
@@ -60,15 +57,9 @@
   }
   
   .auth-button:hover {
-    color: #007BFF; /* Change to the desired hover color */
+    color: #000000; /* Change to the desired hover color */
   }
-  
-  .auth-divider {
-    color: #000;
-    font-size: 1rem;
-    margin: 0 5px;
-  }
-  
+
   @media screen and (max-width: 960px) {
     .navbar {
       background: rgb(208, 208, 240); /* Radium-like gradient */
@@ -76,12 +67,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: fixed;
       top: 0;
       width: 100%;
-      z-index: 1000; 
       font-size: 1.2rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .navbar-logo {

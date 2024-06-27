@@ -1,9 +1,27 @@
 import React from'react';
 import './NavBar.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import yumelogo from '../../images/YumeLogo_1.png';
+import { signOut } from 'aws-amplify/auth';
 
-function navbar() {
+interface NavBarProps {
+  isAuthenticated: boolean;
+  updateAuthStatus: (authStatus: boolean) => void;
+}
+
+function NavBar({ isAuthenticated, updateAuthStatus }: NavBarProps) {
+  const navigate = useNavigate()
+
+  const handleSignout = async () => {
+    try {
+        console.log('Logout');
+        await signOut();
+
+        updateAuthStatus(false);
+        navigate('/');
+    } catch (err) { console.log(err) }
+}
   return (
    <header>
     <nav className='navbar'>
@@ -11,15 +29,25 @@ function navbar() {
         <Link to='/' className='navbar-logo'>
           <img src={yumelogo} alt="yumelogo" className="navbar-logo-img" />
         </Link>
-        <div className='navbar-auth'>
-          <button className='auth-button'>Register</button>
-          <span className='auth-divider'>or</span>
-          <button className='auth-button'>Sign in</button>
-        </div>
+        {
+          isAuthenticated === false && (
+            <div className='navbar-auth'>
+              <button className='auth-button'>Register</button>
+              <button className='auth-button'>SignIn</button>
+            </div>
+          )
+        }
+        {
+          isAuthenticated !== false && (
+            <div className='navbar-auth'>
+              <button className='auth-button' onClick={ handleSignout }>SignOut</button>
+            </div>
+          )
+        }   
       </div>
     </nav>
    </header>
   )
 }
 
-export default navbar
+export default NavBar
