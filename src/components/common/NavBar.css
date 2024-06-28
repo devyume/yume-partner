@@ -26,16 +26,19 @@
   }
   
   .navbar-logo {
-    color: #fff;
+    color: #000000;
     cursor: pointer;
     text-decoration: none;
     display: flex;
     align-items: center;
+    font-weight: 600;
+    font-size: large;
   }
   
   .navbar-logo-img {
-    width: 100px; 
-    height: auto; 
+    width: 30px; 
+    height: 30px; 
+    padding-right: 5px;
   }
 
   .navbar-auth {

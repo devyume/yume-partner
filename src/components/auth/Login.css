@@ -94,6 +94,15 @@
     color: #0056b3;
 }
 
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: smaller;
+    font-weight: 300;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 @media (max-width: 600px) {
     .login-form {
         width: 90%;

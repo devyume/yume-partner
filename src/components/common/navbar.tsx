@@ -35,7 +35,7 @@ function NavBar({ isAuthenticated, updateAuthStatus }: NavBarProps) {
     <nav className='navbar'>
       <div className='navbar-contents'>
         <Link to='/' className='navbar-logo'>
-          <img src={yumelogo} alt="yumelogo" className="navbar-logo-img" />
+          <img src={yumelogo} alt="yumelogo" className="navbar-logo-img" />Yume
         </Link>
         {
           isAuthenticated === false && (

@@ -1,11 +1,11 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Amplify } from "aws-amplify";
-import outputs from "../../amplify_outputs.json";
+// import { Amplify } from "aws-amplify";
+// import outputs from "../../amplify_outputs.json";
 import "./Register.css";
-import { signUp } from "aws-amplify/auth";
+import { getCurrentUser, signUp } from "aws-amplify/auth";
 
-Amplify.configure(outputs);
+// Amplify.configure(outputs);
 
 interface RegisterFormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -17,11 +17,32 @@ interface RegisterForm extends HTMLFormElement {
   readonly elements: RegisterFormElements;
 }
 
-export default function Register() {
+interface RegisterProps {
+  updateAuthStatus: (authStatus: boolean) => void;
+}
+
+
+export default function Register({ updateAuthStatus }: RegisterProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [confirmShowPassword, setConfirmShowPassword] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function checkUser() {
+      try {
+        //await signOut()
+        const user = await getCurrentUser();
+        console.log(user);
+        if (user) {
+          updateAuthStatus(true);
+          navigate('/');
+        }
+      } catch (error) {
+        // No user is signed in, proceed with register
+      }
+    }
+    checkUser();
+  }, [navigate]);
 
   async function handleSubmit(event: FormEvent<RegisterForm>) {
     event.preventDefault();
@@ -40,6 +61,11 @@ export default function Register() {
       await signUp({
         username: form.elements.email.value,
         password: form.elements.password.value,
+        options: {
+          userAttributes: {
+            'custom:isNewUser': 'true',
+          }
+        }
       });
       alert("We've sent you the code. Please check email!");
       navigate('/validate', { state: { email: email } });
@@ -57,22 +83,15 @@ export default function Register() {
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" autoComplete="username" required />
         <label htmlFor="password">Password:</label>
-        <input type={showPassword ? "text" : "password"} id="password" name="password" autoComplete="new-password"required />
+        <input type={showPassword ? "text" : "password"} id="password" name="password" autoComplete="new-password" required />
         <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input type={confirmShowPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" autoComplete="new-password"required />
+        <input type={showPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" autoComplete="new-password" required />
         <div className="show-password-register">
           <input
             type="checkbox"
             id="showPassword"
             checked={showPassword}
             onChange={() => setShowPassword(!showPassword)}
-          />
-          <label htmlFor="showPassword">Show Password</label>
-          <input
-            type="checkbox"
-            id="showPassword"
-            checked={confirmShowPassword}
-            onChange={() => setConfirmShowPassword(!confirmShowPassword)}
           />
           <label htmlFor="showPassword">Show Password</label>
         </div>
