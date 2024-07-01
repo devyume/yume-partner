@@ -24,7 +24,8 @@ function App() {
   useEffect(() => {
     async function checkUser() {
       try {
-        await fetchAuthSession({ forceRefresh: true });
+        const session = await fetchAuthSession({ forceRefresh: true });
+        console.log("app",session);
         const user = await getCurrentUser();
         console.log("hello",user);
         if (user) {
