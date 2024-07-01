@@ -30,7 +30,7 @@ export default function Login({ updateAuthStatus }: LoginProps) {
       try {
         //await signOut()
         const user = await getCurrentUser();
-        //console.log(user);
+        console.log(user);
         if (user) {
           updateAuthStatus(true);
           navigate('/');

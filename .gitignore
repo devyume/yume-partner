@@ -28,3 +28,5 @@ node_modules
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+
+/src/amplfy_outputs.json

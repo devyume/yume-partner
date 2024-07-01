@@ -19,13 +19,14 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  //console.log("hi",isAuthenticated);
+  console.log("hi",isAuthenticated);
 
   useEffect(() => {
     async function checkUser() {
       try {
         await fetchAuthSession({ forceRefresh: true });
         const user = await getCurrentUser();
+        console.log("hello",user);
         if (user) {
           setIsAuthenticated(true);
         }
